@@ -13,7 +13,7 @@ var controller = {
                 
                 return res.status(200).send({message:'soy la test desde controlador'});
             },
-            saveProduct:async  function(req,res){
+            saveProduct:async  function(req,res){//accion para agregar un producto
                 
                     const newProductData = {
                       categoria_id: req.body.categoria_id,
@@ -27,31 +27,28 @@ var controller = {
                     };
               
                     const newProduct = new Product(newProductData);
-                let  respuesta  = await newProduct.save();
+                    let  respuesta  = await newProduct.save();
 
 
 
                     return res.status(200).send({message:respuesta});
                
-/*
-class ProductModel {
-  constructor(productData) {
-    this.id = productData.id;
-    this.categoria_id = productData.categoria_id;
-    this.nombre = productData.nombre;
-    this.descripcion = productData.descripcion;
-    this.precio = productData.precio;
-    this.stock = productData.stock;
-    this.oferta = productData.oferta;
-    this.fecha = productData.fecha;
-    this.image = productData.image;
-    // Puedes agregar más propiedades según tus necesidades
-  }
 
-*/
+
+            },getProductos: async function getProductos(req, res) {//accion para obtener todos los productos
+              try {
+                const newProduct = new Product('');
+                const productos = await newProduct.getProductos();
+                return res.status(200).json({ productos });
+              } catch (error) {
+                console.error('Error al obtener productos:', error);
+                return res.status(500).send('Error al obtener productos');
+              }
+            }
+
 
             }
 
-}
+
 
 module.exports = controller;

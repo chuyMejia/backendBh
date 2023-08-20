@@ -63,6 +63,26 @@ class ProductModel {
       connection.end();
     }
   }
+
+  async getProductos() {
+    const connection = await mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: '',
+      database: 'tienda_master'
+    });
+
+    try {
+      const [rows] = await connection.query('SELECT * FROM productos');
+      return rows; // Devuelve los productos en lugar de usar res.json
+    } catch (error) {
+      console.error('Error al obtener productos:', error);
+      throw error; // Lanza el error para que el controlador lo maneje
+    } finally {
+      connection.end(); // Cierra la conexión cuando hayas terminado
+    }
+  }
+
 }
 
 module.exports = ProductModel;
