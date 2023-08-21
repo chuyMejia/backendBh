@@ -1,6 +1,6 @@
 'use strict';
 const mysql = require('mysql2/promise');
-//const connection = require('../includes/dbconfig'); // Ajusta la ruta según la ubicación real
+//const connection = require('../includes/dbconfig');
 
 
 
@@ -16,7 +16,6 @@ class ProductModel {
     this.fecha = productData.fecha;
     this.image = productData.image;
   
-    // Puedes agregar más propiedades según tus necesidades
   }
 
 

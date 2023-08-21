@@ -8,6 +8,7 @@ var app = express();
 //archivos de rutas
 
 var productRoute = require('./rutes/product');
+var categoryRoute = require('./rutes/categoria');
 
 
 
@@ -20,7 +21,7 @@ app.use(bodyParser.json());
 //configurar el cors 
 
 //rutas
-app.use('/api',productRoute);
+app.use('/api',productRoute,categoryRoute);
 
 
 
