@@ -55,7 +55,7 @@ class ProductModel {
     try {
       const [result] = await connection.query(query, values);
       console.log('Producto insertado con ID:', result.insertId);
-      return 'producto insertado con exito';
+      return result.insertId;
     } catch (error) {
       console.error('Error al insertar producto:', error);
       return 'ocurio un error revisa LOG API para mas informacion';
@@ -73,7 +73,10 @@ class ProductModel {
     });
 
     try {
-      const [rows] = await connection.query('SELECT * FROM productos');
+      const [rows] = await connection.query(`SELECT productos.*, categorias.nombre AS nombre_categoria
+FROM productos
+JOIN categorias ON productos.categoria_id = categorias.id;
+`);
       return rows; // Devuelve los productos en lugar de usar res.json
     } catch (error) {
       console.error('Error al obtener productos:', error);
@@ -117,11 +120,11 @@ class ProductModel {
       WHERE id = ${projectId}
     `;
 
-
+//
     try {
       const [result] = await connection.query(query);
       console.log('Proyecto actualizado:', result.affectedRows);
-      return 'Proyecto actualizado con éxito';
+      return projectId;
     } catch (error) {
       console.error('Error al actualizar proyecto:', error);
       return 'Ocurrió un error al actualizar el proyecto';

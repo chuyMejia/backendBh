@@ -39,12 +39,12 @@ var controller = {
 
            
                 try {
-                  const c = new CategoriaModel('');
+                  const newCategory = new CategoriaModel('');
                   const categoria = await newCategory.getCategorys();
                   return res.status(200).json({ categoria });
                 } catch (error) {
-                  console.error('Error al obtener categoria:', error);
-                  return res.status(500).send('Error al obtener categoria');
+                  console.error('Error al obtener categoriasss:', error);
+                  return res.status(500).send('Error al obtener categoriass');
                 }
 
             },
