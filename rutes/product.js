@@ -20,7 +20,7 @@ router.put('/producto/:id',productController.UpdateProduct);
 router.delete('/producto/:id',productController.deleteProject);
 router.post('/uploadImage/:id',multipartMiddleware, productController.uploadImage);
 router.get('/get-image/:image', productController.getImageFile);
-
+router.get('/prod-categoria/:nombre',productController.getProductoCategory);
 
 
 

@@ -159,7 +159,21 @@ var controller = {
       
               });
       
-          }
+          },getProductoCategory:async function(req,res){
+
+              let nombre = req.params.nombre;
+
+            //  return res.status(200).send({message:'godgdgdg :'+nombre});
+                try {
+                  const newProduct = new Product('');
+                  const productos = await newProduct.getProductoCategory(nombre);
+                  return res.status(200).json({ productos });
+                } catch (error) {
+                  console.error('Error al obtener productos:', error);
+                  return res.status(500).send('Error al obtener productos');
+                }
+
+            }
 
 
             }

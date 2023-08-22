@@ -1,6 +1,8 @@
 'use strict';
 const mysql = require('mysql2/promise');
-const connection = require('../includes/dbconfig');
+//const connection = require('../includes/dbconfig');
+const { connectDatabase } = require('../includes/db');
+
 
 class CategoriaModel {
   constructor(categoriaData) {
@@ -13,12 +15,7 @@ class CategoriaModel {
 
 
   async getCategory(id) {
-    const connection = await mysql.createConnection({
-      host: 'localhost',
-      user: 'root',
-      password: '',
-      database: 'tienda_master'
-    });
+   const connection = await connectDatabase();
 
     try {
       const [rows] = await connection.query(`SELECT * FROM CATEGORIAS WHERE id = ${id}`);
@@ -26,9 +23,7 @@ class CategoriaModel {
     } catch (error) {
       console.error('Error al obtener productos:', error);
       throw error; 
-    } finally {
-      connection.end(); 
-    }
+    } 
   }
 
 
@@ -36,12 +31,7 @@ class CategoriaModel {
 
   
   async getCategorys() {
-    const connection = await mysql.createConnection({
-      host: 'localhost',
-      user: 'root',
-      password: '',
-      database: 'tienda_master'
-    });
+   const connection = await connectDatabase();
 
     try {
       const [rows] = await connection.query(`SELECT * FROM CATEGORIAS`);
@@ -49,9 +39,7 @@ class CategoriaModel {
     } catch (error) {
       console.error('Error al obtener productos:', error);
       throw error; 
-    } finally {
-      connection.end(); 
-    }
+    } 
   }
 
 
@@ -59,12 +47,7 @@ class CategoriaModel {
   
   async save() {
     
-    const connection = await mysql.createConnection({
-      host: 'localhost',
-      user: 'root',
-      password: '',
-      database: 'tienda_master'
-    });
+ const connection = await connectDatabase();
 
     const query = `
       INSERT INTO categorias ( nombre)
@@ -84,21 +67,14 @@ class CategoriaModel {
     } catch (error) {
       console.error('Error al insertar producto:', error);
       return 'ocurio un error revisa LOG API para mas informacion';
-    } finally {
-      connection.end();
-    }
+    } 
   }
   //deleteCategory
 
 
   
   async deleteCategory(cat_id) {
-    const connection = await mysql.createConnection({
-      host: 'localhost',
-      user: 'root',
-      password: '',
-      database: 'tienda_master'
-    });
+   const connection = await connectDatabase();
 
     const query = `
       DELETE FROM categorias
@@ -112,19 +88,12 @@ class CategoriaModel {
     } catch (error) {
       console.error('Error al eliminar categoria:', error);
       return 'Ocurrió un error al eliminar el categoria';
-    } finally {
-      connection.end();
-    }
+    } 
   }
 
   //updateCategory
   async updateCategory(categoryId, newData) {
-    const connection = await mysql.createConnection({
-      host: 'localhost',
-      user: 'root',
-      password: '',
-      database: 'tienda_master'
-    });
+  const connection = await connectDatabase();
 
     const query = `
       UPDATE categorias
@@ -140,9 +109,7 @@ class CategoriaModel {
     } catch (error) {
       console.error('Error al actualizar categoria:', error);
       return 'Ocurrió un error al actualizar el categoria';
-    } finally {
-      connection.end();
-    }
+    } 
   }
 
 }  

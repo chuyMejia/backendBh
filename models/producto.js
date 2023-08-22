@@ -2,6 +2,8 @@
 const mysql = require('mysql2/promise');
 //const connection = require('../includes/dbconfig');
 
+const { connectDatabase } = require('../includes/db');
+
 
 
 class ProductModel {
@@ -29,12 +31,7 @@ class ProductModel {
 
   async save() {
     
-    const connection = await mysql.createConnection({
-      host: 'localhost',
-      user: 'root',
-      password: '',
-      database: 'tienda_master'
-    });
+    const connection = await connectDatabase();
 
     const query = `
       INSERT INTO productos (categoria_id, nombre, descripcion, precio, stock, oferta, fecha, image)
@@ -59,18 +56,18 @@ class ProductModel {
     } catch (error) {
       console.error('Error al insertar producto:', error);
       return 'ocurio un error revisa LOG API para mas informacion';
-    } finally {
-      connection.end();
-    }
+    } 
   }
 
   async getProductos() {
-    const connection = await mysql.createConnection({
+   /* const connection = await mysql.createConnection({
       host: 'localhost',
       user: 'root',
       password: '',
       database: 'tienda_master'
-    });
+    });*/
+
+     const connection = await connectDatabase();
 
     try {
       const [rows] = await connection.query(`SELECT productos.*, categorias.nombre AS nombre_categoria
@@ -81,18 +78,11 @@ JOIN categorias ON productos.categoria_id = categorias.id;
     } catch (error) {
       console.error('Error al obtener productos:', error);
       throw error; // Lanza el error para que el controlador lo maneje
-    } finally {
-      connection.end(); // Cierra la conexión cuando hayas terminado
-    }
+    } 
   }
 
   async getProducto(id) {
-    const connection = await mysql.createConnection({
-      host: 'localhost',
-      user: 'root',
-      password: '',
-      database: 'tienda_master'
-    });
+    const connection = await connectDatabase();
 
     try {
       const [rows] = await connection.query(`SELECT * FROM productos WHERE id = ${id}`);
@@ -100,19 +90,12 @@ JOIN categorias ON productos.categoria_id = categorias.id;
     } catch (error) {
       console.error('Error al obtener productos:', error);
       throw error; // Lanza el error para que el controlador lo maneje
-    } finally {
-      connection.end(); // Cierra la conexión cuando hayas terminado
     }
   }
 
 
   async updateProject(projectId, newData) {
-    const connection = await mysql.createConnection({
-      host: 'localhost',
-      user: 'root',
-      password: '',
-      database: 'tienda_master'
-    });
+    const connection = await connectDatabase();
 
     const query = `
       UPDATE productos
@@ -128,18 +111,11 @@ JOIN categorias ON productos.categoria_id = categorias.id;
     } catch (error) {
       console.error('Error al actualizar proyecto:', error);
       return 'Ocurrió un error al actualizar el proyecto';
-    } finally {
-      connection.end();
-    }
+    } 
   }
 
   async deleteProject(projectId) {
-    const connection = await mysql.createConnection({
-      host: 'localhost',
-      user: 'root',
-      password: '',
-      database: 'tienda_master'
-    });
+    const connection = await connectDatabase();
 
     const query = `
       DELETE FROM productos
@@ -153,19 +129,12 @@ JOIN categorias ON productos.categoria_id = categorias.id;
     } catch (error) {
       console.error('Error al eliminar proyecto:', error);
       return 'Ocurrió un error al eliminar el proyecto';
-    } finally {
-      connection.end();
-    }
+    } 
   }
 
 
   async updateImageInDatabase(projectId, fileName) {
-    const connection = await mysql.createConnection({
-      host: 'localhost',
-      user: 'root',
-      password: '',
-      database: 'tienda_master'
-    });
+    const connection = await connectDatabase();
 
     const query = 'UPDATE productos SET image = ? WHERE id = ?';
     const values = [fileName, projectId];
@@ -175,10 +144,29 @@ JOIN categorias ON productos.categoria_id = categorias.id;
       console.log('Imagen actualizada en la base de datos');
     } catch (error) {
       console.error('Error al actualizar la imagen en la base de datos:', error);
-    } finally {
-      connection.end();
+    } 
+  }
+
+
+  
+
+
+  async getProductoCategory(nombre) {
+    const connection = await connectDatabase();
+
+    try {
+      const [rows] = await connection.query(`SELECT productos.*, categorias.nombre AS nombre_categoria
+                                              FROM productos
+                                            JOIN categorias ON productos.categoria_id = categorias.id
+                                            WHERE categorias.nombre = '${nombre}'`);                 
+      return rows; // Devuelve los productos en lugar de usar res.json
+    } catch (error) {
+      console.error('Error al obtener productos:', error);
+      throw error; // Lanza el error para que el controlador lo maneje
     }
   }
+
+
 
 }
 
