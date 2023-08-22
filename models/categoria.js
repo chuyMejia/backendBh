@@ -11,7 +11,7 @@ class CategoriaModel {
     this.nombre = categoriaData.nombre;
   }
     
-
+//
 
 
   async getCategory(id) {

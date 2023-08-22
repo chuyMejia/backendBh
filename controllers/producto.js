@@ -15,7 +15,7 @@ var controller = {
             },
             test:function(req,res){
                 
-                return res.status(200).send({message:'soy la test desde controlador'});
+                return res.status(200).send({message:'test'});
             },
             saveProduct:async  function(req,res){//accion para agregar un producto
                 
@@ -61,7 +61,7 @@ var controller = {
                   return res.status(200).json({ productos });
                 } catch (error) {
                   console.error('Error al obtener productos:', error);
-                  return res.status(500).send('Error al obtener productos');
+                  return res.status(500).send('Error al obtener producto');
                 }
 
             },UpdateProduct: async function(req,res){//action para hacer update de un producto

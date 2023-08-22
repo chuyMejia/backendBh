@@ -1,0 +1,153 @@
+DOCUMENTACIÓN API Bh_backend
+
+RUTAS DE PRODUCTO
+
+
+Endpoint: http://localhost:3700/api/test
+Método: POST
+Descripción: Realiza una prueba.
+Parámetros por GET: Ninguno
+Parámetros por Body: Ninguno
+Estatus 200:{message:'test'}
+Estatus 500:
+
+
+
+Endpoint: http://localhost:3700/api/save-product
+Método: POST
+Descripción: Guarda un nuevo producto.
+Parámetros por GET: Ninguno
+Parámetros por Body: Datos del nuevo producto
+KEYS->
+→nombre:             texto
+→descripcion:      texto
+→categoria_id:     numerico
+→precio:               numerico
+→stock:                 numerico
+Estatus 200:{message:'test'}
+Estatus 500:
+
+
+Endpoint: http://localhost:3700/api/productos
+Método: GET
+Descripción: Obtiene la lista de productos.
+Parámetros por GET: Ninguno
+Parámetros por Body: Ninguno
+Estatus 200:{productos:[{All products}]}
+Estatus 500:{'Error al obtener productos'}
+
+
+Endpoint: http://localhost:3700/api/producto/:id
+Método: GET
+Descripción: Obtiene los detalles de un producto por su ID.
+Parámetros por GET: id (integer) - ID del producto a obtener.
+Parámetros por Body: Ninguno
+Estatus 200:{productos:[{product}]}
+Estatus 500:{'Error al obtener producto'}
+
+
+Endpoint: http://localhost:3700/api/producto/:id
+Método: PUT
+Descripción: Actualiza los detalles de un producto por su ID.
+Parámetros por GET: id (integer) - ID del producto a actualizar.
+Parámetros por Body: Nuevos datos del producto
+KEYS->
+KEYS->
+→nombre:             texto
+→descripcion:      texto
+→categoria_id:     numerico
+→precio:               numerico
+→stock:                 numerico
+Estatus 200:{id (integer) - ID del producto a actualizar}
+Estatus 500:
+
+
+Endpoint: http://localhost:3700/api/producto/:id
+Método: DELETE
+Descripción: Elimina un producto por su ID.
+Parámetros por GET: id (integer) - ID del producto a eliminar.
+Parámetros por Body: Ninguno
+Estatus 200:{'Proyecto eliminado con éxito'}
+Estatus 500:{'Error al obtener productos'}
+
+
+Endpoint: http://localhost:3700/api/uploadImage/:id
+Método: POST
+Descripción: Carga una imagen asociada a un producto.
+Parámetros por GET: id (integer) - ID del producto al que se cargará la imagen.
+Parámetros por Body: Imagen a cargar
+Estatus 200:{ message: 'Imagen subida y actualizada con éxito' }
+Estatus 500:{'Error al obtener productos'}
+
+
+Endpoint: http://localhost:3700/api/get-image/:image
+Método: GET
+Descripción: Obtiene una imagen por su nombre.
+Parámetros por GET: image (string) - Nombre de la imagen a obtener.
+Parámetros por Body: Ninguno
+Estatus 200:{retorna la imagen }
+Estatus 500:{ message:'no existe el archivo de imagen..'}
+
+
+Endpoint: http://localhost:3700/api/prod-categoria/:nombre
+Método: GET
+Descripción: Obtiene productos por nombre de categoría.
+Parámetros por GET: nombre (string) - Nombre de la categoría.
+Parámetros por Body: Ninguno
+Estatus 200:{ productos }
+Estatus 500:{'Error al obtener productos'}
+
+RUTAS DE CATEGORIA
+
+
+Endpoint: http://localhost:3700/api/test-Category
+Método: POST
+Descripción: Realiza una prueba en categorías.
+Parámetros por GET: Ninguno
+Parámetros por Body: Ninguno
+Estatus 200:{message:'TEST'}
+Estatus 500:
+
+Endpoint: http://localhost:3700/api/categoria/:id
+Método: GET
+Descripción: Obtiene los detalles de una categoría por su ID.
+Parámetros por GET: id (integer) - ID de la categoría a obtener.
+Parámetros por Body: Ninguno
+Estatus 200:{ categoria }
+Estatus 500:{'Error al obtener categoria'}
+
+Endpoint: http://localhost:3700/api/categorias
+Método: GET
+Descripción: Obtiene la lista de categorías.
+Parámetros por GET: Ninguno
+Parámetros por Body: Ninguno
+Estatus 200:{ categoria }
+Estatus 500:{'Error al obtener categoriass'}
+
+
+Endpoint: http://localhost:3700/api/save-category
+Método: POST
+Descripción: Guarda una nueva categoría.
+Parámetros por GET: Ninguno
+Parámetros por Body: Datos de la nueva categoría
+Estatus 200:{message:respuesta}
+Estatus 500:{'Error al obtener cattegoria'}
+
+Endpoint: http://localhost:3700/api/categoria/:id
+Método: DELETE
+Descripción: Elimina una categoría por su ID.
+Parámetros por GET: id (integer) - ID de la categoría a eliminar.
+Parámetros por Body: Ninguno
+Estatus 200:{ respuesta }
+Estatus 500::{'Error al obtener cattegoria'}
+
+
+Endpoint: http://localhost:3700/api/categoria/:id
+Método: PUT
+Descripción: Actualiza los detalles de una categoría por su ID.
+Parámetros por GET: id (integer) - ID de la categoría a actualizar.
+Parámetros por Body: Nuevos datos de la categoría
+Estatus 200:{message:respuesta}
+Estatus 500:
+
+
